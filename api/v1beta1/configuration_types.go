@@ -70,6 +70,9 @@ type BaseConfigurationSpec struct {
 
 	// Region is cloud provider's region. It will override the region in the region field of ProviderReference
 	Region string `json:"region,omitempty"`
+
+	// GitCredentialsReference specifies the reference to the secret containing the git credentials
+	GitCredentialsReference *types.SecretReference `json:"gitCredentialsReference,omitempty"`
 }
 
 // ConfigurationStatus defines the observed state of Configuration

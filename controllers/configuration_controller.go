@@ -232,27 +232,26 @@ type ResourceQuota struct {
 
 // TFConfigurationMeta is all the metadata of a Configuration
 type TFConfigurationMeta struct {
-	Name                    string
-	Namespace               string
-	ControllerNamespace     string
-	ConfigurationType       types.ConfigurationType
-	CompleteConfiguration   string
-	RemoteGit               string
-	RemoteGitPath           string
-	ConfigurationChanged    bool
-	EnvChanged              bool
-	ConfigurationCMName     string
-	ApplyJobName            string
-	DestroyJobName          string
-	Envs                    []v1.EnvVar
-	ProviderReference       *crossplane.Reference
-	VariableSecretName      string
-	VariableSecretData      map[string][]byte
-	DeleteResource          bool
-	Region                  string
-	Credentials             map[string]string
-	JobEnv                  map[string]interface{}
-	GitCredentialsReference *crossplane.SecretReference
+	Name                  string
+	Namespace             string
+	ControllerNamespace   string
+	ConfigurationType     types.ConfigurationType
+	CompleteConfiguration string
+	RemoteGit             string
+	RemoteGitPath         string
+	ConfigurationChanged  bool
+	EnvChanged            bool
+	ConfigurationCMName   string
+	ApplyJobName          string
+	DestroyJobName        string
+	Envs                  []v1.EnvVar
+	ProviderReference     *crossplane.Reference
+	VariableSecretName    string
+	VariableSecretData    map[string][]byte
+	DeleteResource        bool
+	Region                string
+	Credentials           map[string]string
+	JobEnv                map[string]interface{}
 
 	Backend backend.Backend
 	// JobNodeSelector Expose the node selector of job to the controller level
@@ -312,10 +311,6 @@ func initTFConfigurationMeta(req ctrl.Request, configuration v1beta2.Configurati
 
 	if !configuration.Spec.InlineCredentials {
 		meta.ProviderReference = tfcfg.GetProviderNamespacedName(configuration)
-	}
-
-	if configuration.Spec.GitCredentialsReference != nil {
-		meta.GitCredentialsReference = configuration.Spec.GitCredentialsReference
 	}
 
 	return meta
@@ -550,20 +545,6 @@ func (r *ConfigurationReconciler) preCheck(ctx context.Context, configuration *v
 		}
 		if err := meta.getCredentials(ctx, k8sClient, p); err != nil {
 			return err
-		}
-	}
-
-	if meta.GitCredentialsReference != nil {
-		gitCreds, err := GetGitCredentialsFromConfiguration(ctx, k8sClient, meta.GitCredentialsReference.Namespace, meta.GitCredentialsReference.Name)
-		if gitCreds == nil {
-			msg := "git credentials Secret not found"
-			if err != nil {
-				msg = err.Error()
-			}
-			if updateStatusErr := meta.updateApplyStatus(ctx, k8sClient, types.GitCredentialsNotFound, msg); updateStatusErr != nil {
-				return errors.Wrap(updateStatusErr, msg)
-			}
-			return errors.New(msg)
 		}
 	}
 
