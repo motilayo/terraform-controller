@@ -170,6 +170,11 @@ func (in *ConfigurationSpec) DeepCopyInto(out *ConfigurationSpec) {
 		*out = new(crossplane_runtime.Reference)
 		**out = **in
 	}
+	if in.JobEnv != nil {
+		in, out := &in.JobEnv, &out.JobEnv
+		*out = new(runtime.RawExtension)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.DeleteResource != nil {
 		in, out := &in.DeleteResource, &out.DeleteResource
 		*out = new(bool)
@@ -178,6 +183,11 @@ func (in *ConfigurationSpec) DeepCopyInto(out *ConfigurationSpec) {
 	if in.ForceDelete != nil {
 		in, out := &in.ForceDelete, &out.ForceDelete
 		*out = new(bool)
+		**out = **in
+	}
+	if in.GitCredentialsReference != nil {
+		in, out := &in.GitCredentialsReference, &out.GitCredentialsReference
+		*out = new(crossplane_runtime.SecretReference)
 		**out = **in
 	}
 }

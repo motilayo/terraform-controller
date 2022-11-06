@@ -75,6 +75,9 @@ type ConfigurationSpec struct {
 	// ForceDelete will force delete Configuration no matter which state it is or whether it has provisioned some resources
 	// It will help delete Configuration in unexpected cases.
 	ForceDelete *bool `json:"forceDelete,omitempty"`
+
+	// GitCredentialsReference specifies the reference to the secret containing the git credentials
+	GitCredentialsReference *types.SecretReference `json:"gitCredentialsReference,omitempty"`
 }
 
 // ConfigurationStatus defines the observed state of Configuration
