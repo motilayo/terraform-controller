@@ -65,9 +65,8 @@ const (
 	// terraformContainerName is the name of the container that executes the terraform in the pod
 	terraformContainerName     = "terraform-executor"
 	terraformInitContainerName = "terraform-init"
-	// GitAuthConfigVolumeName is the volume name for git auth configurtaion
-	GitAuthConfigVolumeName = "git-auth-configuration"
-	// GitAuthConfigVolumeMountPath is the volume mount path for git auth configurtaion
+
+	GitAuthConfigVolumeName      = "git-auth-configuration"
 	GitAuthConfigVolumeMountPath = "/root/.ssh"
 )
 
@@ -232,26 +231,27 @@ type ResourceQuota struct {
 
 // TFConfigurationMeta is all the metadata of a Configuration
 type TFConfigurationMeta struct {
-	Name                  string
-	Namespace             string
-	ControllerNamespace   string
-	ConfigurationType     types.ConfigurationType
-	CompleteConfiguration string
-	RemoteGit             string
-	RemoteGitPath         string
-	ConfigurationChanged  bool
-	EnvChanged            bool
-	ConfigurationCMName   string
-	ApplyJobName          string
-	DestroyJobName        string
-	Envs                  []v1.EnvVar
-	ProviderReference     *crossplane.Reference
-	VariableSecretName    string
-	VariableSecretData    map[string][]byte
-	DeleteResource        bool
-	Region                string
-	Credentials           map[string]string
-	JobEnv                map[string]interface{}
+	Name                    string
+	Namespace               string
+	ControllerNamespace     string
+	ConfigurationType       types.ConfigurationType
+	CompleteConfiguration   string
+	RemoteGit               string
+	RemoteGitPath           string
+	ConfigurationChanged    bool
+	EnvChanged              bool
+	ConfigurationCMName     string
+	ApplyJobName            string
+	DestroyJobName          string
+	Envs                    []v1.EnvVar
+	ProviderReference       *crossplane.Reference
+	VariableSecretName      string
+	VariableSecretData      map[string][]byte
+	DeleteResource          bool
+	Region                  string
+	Credentials             map[string]string
+	JobEnv                  map[string]interface{}
+	GitCredentialsReference *v1.SecretReference
 
 	Backend backend.Backend
 	// JobNodeSelector Expose the node selector of job to the controller level
@@ -712,6 +712,10 @@ func (meta *TFConfigurationMeta) assembleTerraformJob(executionType TerraformExe
 		{
 			Name:      BackendVolumeName,
 			MountPath: BackendVolumeMountPath,
+		},
+		{
+			Name:      GitAuthConfigVolumeName,
+			MountPath: GitAuthConfigVolumeMountPath,
 		},
 	}
 
