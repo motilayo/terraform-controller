@@ -1,4 +1,4 @@
-module github.com/oam-dev/terraform-controller
+module github.com/motilayo/terraform-controller
 
 go 1.17
 
@@ -11,6 +11,7 @@ require (
 	github.com/google/go-cmp v0.5.8
 	github.com/hashicorp/hcl/v2 v2.12.0
 	github.com/jinzhu/copier v0.3.5
+	github.com/oam-dev/terraform-controller v0.7.7
 	github.com/onsi/ginkgo v1.16.4
 	github.com/onsi/gomega v1.19.0
 	github.com/pkg/errors v0.9.1
@@ -39,7 +40,6 @@ require (
 	github.com/davecgh/go-spew v1.1.1 // indirect
 	github.com/evanphx/json-patch v4.11.0+incompatible // indirect
 	github.com/fsnotify/fsnotify v1.4.9 // indirect
-	github.com/go-test/deep v1.0.7 // indirect
 	github.com/gogo/protobuf v1.3.2 // indirect
 	github.com/golang/groupcache v0.0.0-20200121045136-8c9f03a8e57e // indirect
 	github.com/golang/protobuf v1.5.2 // indirect
@@ -50,7 +50,6 @@ require (
 	github.com/imdario/mergo v0.3.12 // indirect
 	github.com/jmespath/go-jmespath v0.4.0 // indirect
 	github.com/json-iterator/go v1.1.11 // indirect
-	github.com/kr/pretty v0.2.1 // indirect
 	github.com/matttproud/golang_protobuf_extensions v1.0.2-0.20181231171920-c182affec369 // indirect
 	github.com/mitchellh/go-wordwrap v1.0.1 // indirect
 	github.com/modern-go/concurrent v0.0.0-20180306012644-bacd9c7ef1dd // indirect
@@ -82,4 +81,7 @@ require (
 	sigs.k8s.io/structured-merge-diff/v4 v4.1.2 // indirect
 )
 
-replace github.com/jmespath/go-jmespath v0.4.0 => github.com/cloud-native-application/go-jmespath v0.5.0
+replace (
+	github.com/jmespath/go-jmespath v0.4.0 => github.com/cloud-native-application/go-jmespath v0.5.0
+	github.com/oam-dev/terraform-controller => github.com/motilayo/terraform-controller v0.7.8-0.20221110233326-19b529eb7563
+)
