@@ -23,15 +23,15 @@ import (
 )
 
 var (
-	testConfigurationsInlineCredentials                        = "examples/random/configuration_random.yaml"
-	testConfigurationsInlineCredentialsCustomBackendKubernetes = "examples/random/configuration_random_custom_backend_kubernetes.yaml"
+	testConfigurationsInlineCredentials                        = "../examples/random/configuration_random.yaml"
+	testConfigurationsInlineCredentialsCustomBackendKubernetes = "../examples/random/configuration_random_custom_backend_kubernetes.yaml"
 	testConfigurationsRegression                               = []string{
 		"examples/alibaba/eip/configuration_eip.yaml",
 		"examples/alibaba/eip/configuration_eip_remote_in_another_namespace.yaml",
 		"examples/alibaba/eip/configuration_eip_remote_subdirectory.yaml",
 		"examples/alibaba/oss/configuration_hcl_bucket.yaml",
 	}
-	testConfigurationsForceDelete             = "examples/random/configuration_force_delete.yaml"
+	testConfigurationsForceDelete             = "../examples/random/configuration_force_delete.yaml"
 	testConfigurationsGitCredsSecretReference = "../examples/random/configuration_git_ssh.yaml"
 	chartNamespace                            = "terraform"
 )

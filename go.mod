@@ -27,10 +27,7 @@ require (
 	sigs.k8s.io/yaml v1.2.0
 )
 
-require (
-	github.com/kylelemons/godebug v1.1.0 // indirect
-	golang.org/x/tools v0.2.0 // indirect
-)
+require golang.org/x/tools v0.2.0 // indirect
 
 require (
 	github.com/agext/levenshtein v1.2.3 // indirect
